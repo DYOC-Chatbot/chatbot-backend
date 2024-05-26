@@ -160,11 +160,11 @@ func broadcast(hub *ws.Hub, t string, v any) error {
 func broadcastMessage(hub *ws.Hub, msg *model.Message, chatID uint) error {
 	msgView := viewmodel.MessageWebSocketView{
 		BaseMessageView: viewmodel.BaseMessageView{
-			TelegramMessageId: msg.TelegramMessageID,
+			TelegramMessageID: msg.TelegramMessageID,
 			By:                string(msg.By),
 			MessageBody:       msg.MessageBody,
 			Timestamp:         msg.Timestamp.Format(time.RFC3339),
-			RequestQueryId:    msg.RequestQueryID,
+			RequestQueryID:    msg.RequestQueryID,
 		},
 		ChatID: chatID,
 	}

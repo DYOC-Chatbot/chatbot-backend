@@ -65,7 +65,11 @@ func TestCreateMessage(t *testing.T) {
 			By:                model.ByStaff,
 			MessageBody:       "very cool message",
 			Timestamp:         time.Now(),
+<<<<<<< HEAD
 			HotelStaffId:      &user.ID,
+=======
+			HotelStaffID:      &user.ID,
+>>>>>>> 9716692 (refactor: rename all Id instances to ID)
 			RequestQueryID:    query.ID,
 		}
 		AssertNoErr(t, message.Create(db))
