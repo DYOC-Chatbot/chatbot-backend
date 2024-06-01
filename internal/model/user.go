@@ -25,7 +25,7 @@ type User struct {
 
 func (u *User) ToView() *viewmodel.UserView {
 	return &viewmodel.UserView{
-		ID: u.ID, Username: u.Username,
+		ID: u.ID, Username: u.Username, Role: string(u.Role),
 	}
 }
 

@@ -8,5 +8,5 @@ type Params struct {
 }
 
 func (p *Params) ToModel() *model.User {
-	return &model.User{Username: p.Username, EncryptedPassword: p.Password}
+	return &model.User{Username: p.Username, EncryptedPassword: p.Password, Role: model.StaffRole}
 }

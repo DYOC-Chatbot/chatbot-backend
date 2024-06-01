@@ -78,5 +78,7 @@ func Setup(cfg *configs.Config, hub *ws.Hub) *echo.Echo {
 	// Websocket
 	g.GET("/ws", websockethandler.ServeWs(hub))
 
+	UserRoutes(g.Group("/users"))
+
 	return e
 }
