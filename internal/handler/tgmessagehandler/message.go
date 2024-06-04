@@ -30,7 +30,7 @@ func HandleMessage(bot *tgbotapi.BotAPI, hub *ws.Hub, msg *tgbotapi.Message) err
 		return err
 	}
 
-	msgModel, err := saveTgMessageToDB(db, msg, model.ByGuest)
+	msgModel, err := SaveTgMessageToDB(db, msg, model.ByGuest)
 	if err != nil {
 		return err
 	}
@@ -49,7 +49,7 @@ func HandleMessage(bot *tgbotapi.BotAPI, hub *ws.Hub, msg *tgbotapi.Message) err
 		return err
 	}
 
-	msgModel, err = saveTgMessageToDB(db, aiReplyMsg, model.ByBot)
+	msgModel, err = SaveTgMessageToDB(db, aiReplyMsg, model.ByBot)
 	if err != nil {
 		return err
 	}
