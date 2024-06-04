@@ -66,7 +66,8 @@ func readChatByTgChatIDOrCreate(db *gorm.DB, tgChatID int64) (*model.Chat, error
 	return tgChat, nil
 }
 
-func saveTgMessageToDB(db *gorm.DB, msg *tgbotapi.Message, by model.By) (*model.Message, error) {
+// TODO: Consider moving this function into a dataaccess package
+func SaveTgMessageToDB(db *gorm.DB, msg *tgbotapi.Message, by model.By) (*model.Message, error) {
 	chat, err := chat.ReadByTgChatID(db, msg.Chat.ID)
 	if err != nil {
 		if internalerror.IsRecordNotFoundError(err) {

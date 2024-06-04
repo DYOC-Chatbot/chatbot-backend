@@ -32,7 +32,7 @@ func HandleQueryCommand(bot *tgbotapi.BotAPI, hub *ws.Hub, msg *tgbotapi.Message
 		return err
 	}
 
-	msgModel, err := saveTgMessageToDB(db, msg, model.ByGuest)
+	msgModel, err := SaveTgMessageToDB(db, msg, model.ByGuest)
 	if err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ func HandleQueryCommand(bot *tgbotapi.BotAPI, hub *ws.Hub, msg *tgbotapi.Message
 		return err
 	}
 
-	msgModel, err = saveTgMessageToDB(db, aiReplyMsg, model.ByBot)
+	msgModel, err = SaveTgMessageToDB(db, aiReplyMsg, model.ByBot)
 	if err != nil {
 		return err
 	}
