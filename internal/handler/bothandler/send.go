@@ -3,7 +3,10 @@ package bothandler
 import (
 	"backend/internal/dataaccess/chat"
 	"backend/internal/database"
+	"backend/internal/handler/tgmessagehandler"
+	"backend/internal/model"
 	"backend/internal/params/tgmessageparams"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -13,6 +16,7 @@ import (
 func SendMessage(c echo.Context) error {
 	chatIDStr := c.Param("chat_id")
 	chatID, err := strconv.Atoi(chatIDStr)
+
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, "Invalid chat_id "+err.Error())
 	}
@@ -31,10 +35,17 @@ func SendMessage(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	_, err = SendTelegramMessage(int64(chat.TelegramChatId), nil, r.Message)
+	msg, err := SendTelegramMessage(int64(chat.TelegramChatId), nil, r.Message)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.JSON(http.StatusOK, "Message sent")
+	// Assumption: This endpoint will only be used by staff when sending messages directly to the user
+	msgModel, err := tgmessagehandler.SaveTgMessageToDB(db, msg, model.ByStaff)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, fmt.Sprintf("Message sent: %s", msgModel.MessageBody))
 }
