@@ -42,7 +42,7 @@ func (m *Message) Delete(db *gorm.DB) error {
 var v uint = 1
 
 var sampleGuestMessage = Message{
-	TelegramMessageId: 1,
+	TelegramMessageID: 1,
 	By:                ByGuest,
 	MessageBody:       "Hello",
 	Timestamp:         time.Now(),

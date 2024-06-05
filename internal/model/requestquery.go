@@ -67,8 +67,8 @@ func (r *RequestQuery) BeforeSave(tx *gorm.DB) error {
 var sampleRequest = RequestQuery{
 	Status:    StatusClosed,
 	Type:      TypeQuery,
-	BookingId: &v,
-	ChatId:    1,
+	BookingID: &v,
+	ChatID:    1,
 	Messages:  []Message{},
 }
 
