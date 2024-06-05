@@ -53,3 +53,18 @@ func (u *User) BeforeCreate(db *gorm.DB) error {
 	u.EncryptedPassword = string(bytes)
 	return nil
 }
+
+// populate user table with sample values
+var sampleHotelStaff = User{
+	Username:          "staff1",
+	EncryptedPassword: "unencryptedsamplepassword",
+	Messages:          []Message{},
+	Role:              StaffRole,
+}
+
+func (u *User) PopulateUsers(db *gorm.DB) {
+	if err := db.Where("true").Unscoped().Delete(&User{}).Error; err != nil {
+		panic("failed to clear table")
+	}
+	db.Create(&sampleHotelStaff)
+}

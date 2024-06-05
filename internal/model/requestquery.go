@@ -62,3 +62,18 @@ func (r *RequestQuery) BeforeSave(tx *gorm.DB) error {
 	}
 	return nil
 }
+
+var sampleRequest = RequestQuery{
+	Status:    StatusClosed,
+	Type:      TypeQuery,
+	BookingId: &v,
+	ChatId:    1,
+	Messages:  []Message{},
+}
+
+func (m *RequestQuery) PopulateRequestQueries(db *gorm.DB) {
+	if err := db.Where("true").Unscoped().Delete(&RequestQuery{}).Error; err != nil {
+		panic("failed to clear table")
+	}
+	db.Create(&sampleRequest)
+}

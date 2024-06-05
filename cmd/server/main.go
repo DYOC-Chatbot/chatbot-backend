@@ -16,6 +16,7 @@ func main() {
 		panic(err)
 	}
 	database.SetupDb(cfg.GetDatabaseConfig())
+	database.PopulateDb()
 
 	e := router.Setup(cfg)
 

@@ -24,3 +24,28 @@ func (c *Chat) Update(db *gorm.DB) error {
 func (c *Chat) Delete(db *gorm.DB) error {
 	return db.Delete(c).Error
 }
+
+// populate chat table with sample values
+var SampleChatWithRequest = Chat{
+	TelegramChatId: 1,
+	RequestQueries: []RequestQuery{},
+}
+
+var sampleChatWithQuery = Chat{
+	TelegramChatId: 2,
+	RequestQueries: []RequestQuery{},
+}
+
+var sampleChatWithUnknown = Chat{
+	TelegramChatId: 3,
+	RequestQueries: []RequestQuery{},
+}
+
+func (*Chat) PopulateChats(db *gorm.DB) {
+	if err := db.Where("true").Unscoped().Delete(&Chat{}).Error; err != nil {
+		panic("failed to clear table")
+	}
+	db.Create(&SampleChatWithRequest)
+	db.Create(&sampleChatWithQuery)
+	db.Create(&sampleChatWithUnknown)
+}

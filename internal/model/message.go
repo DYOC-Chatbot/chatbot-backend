@@ -38,3 +38,21 @@ func (m *Message) Update(db *gorm.DB) error {
 func (m *Message) Delete(db *gorm.DB) error {
 	return db.Delete(m).Error
 }
+
+var v uint = 1
+
+var sampleGuestMessage = Message{
+	TelegramMessageId: 1,
+	By:                ByGuest,
+	MessageBody:       "Hello",
+	Timestamp:         time.Now(),
+	HotelStaffId:      &v,
+	RequestQueryId:    1,
+}
+
+func (m *Message) PopulateMessages(db *gorm.DB) {
+	if err := db.Where("true").Unscoped().Delete(&Message{}).Error; err != nil {
+		panic("failed to clear table")
+	}
+	db.Create(&sampleGuestMessage)
+}
