@@ -5,6 +5,7 @@ import (
 	"backend/internal/database"
 	"backend/internal/router"
 	"backend/internal/telegram"
+	"backend/internal/ws"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -15,12 +16,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	database.SetupDb(cfg.GetDatabaseConfig())
 	database.PopulateDb()
 
-	e := router.Setup(cfg)
+	hub := ws.NewHub()
+	go hub.Run()
 
-	go telegram.StartChatbot(cfg.TelegramToken)
+	e := router.Setup(cfg, hub)
+	go telegram.StartChatbot(cfg, hub)
 
 	// Writing routes for debugging - we can optionally delete later
 	data, _ := json.MarshalIndent(e.Routes(), "", "  ")
