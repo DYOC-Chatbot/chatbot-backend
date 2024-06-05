@@ -18,6 +18,7 @@ func main() {
 	}
 
 	database.SetupDb(cfg.GetDatabaseConfig())
+	database.PopulateDb()
 
 	hub := ws.NewHub()
 	go hub.Run()

@@ -29,6 +29,7 @@ func (b *Booking) Delete(db *gorm.DB) error {
 	return db.Delete(b).Error
 }
 
+<<<<<<< HEAD
 func PopulateBookings(db *gorm.DB) {
 
 	bookings := []Booking{
@@ -60,4 +61,33 @@ func PopulateBookings(db *gorm.DB) {
 			fmt.Printf("Error when creating booking")
 		}
 	}
+=======
+// populate bookings table with sample values
+
+var sampleBookingWithRequest = Booking{
+	RoomNumber: "Testing Room 1",
+	LastName:   "Guest1",
+	ChatId:     1,
+}
+
+var sampleBookingWithQuery = Booking{
+	RoomNumber: "Testing Room 2",
+	LastName:   "Guest2",
+	ChatId:     2,
+}
+
+var sampleBookingWithUnknown = Booking{
+	RoomNumber: "Testing Room 3",
+	LastName:   "Guest3",
+	ChatId:     3,
+}
+
+func (*Booking) PopulateBookings(db *gorm.DB) {
+	if err := db.Where("true").Unscoped().Delete(&Booking{}).Error; err != nil {
+		panic("failed to clear table")
+	}
+	db.Create(&sampleBookingWithRequest)
+	db.Create(&sampleBookingWithQuery)
+	db.Create(&sampleBookingWithUnknown)
+>>>>>>> 790e525 ((feat:) populate database with seed data)
 }
