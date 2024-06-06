@@ -64,30 +64,46 @@ func PopulateBookings(db *gorm.DB) {
 =======
 // populate bookings table with sample values
 
-var sampleBookingWithRequest = Booking{
-	RoomNumber: "Testing Room 1",
-	LastName:   "Guest1",
-	ChatId:     1,
-}
-
-var sampleBookingWithQuery = Booking{
-	RoomNumber: "Testing Room 2",
-	LastName:   "Guest2",
-	ChatId:     2,
-}
-
-var sampleBookingWithUnknown = Booking{
-	RoomNumber: "Testing Room 3",
-	LastName:   "Guest3",
-	ChatId:     3,
-}
-
 func (*Booking) PopulateBookings(db *gorm.DB) {
+
+	bookings := []Booking{
+		{
+			RoomNumber: "Testing Room 1",
+			LastName:   "Guest1",
+			ChatId:     1,
+		},
+		{
+			RoomNumber: "Testing Room 2",
+			LastName:   "Guest2",
+			ChatId:     2,
+		},
+		{
+			RoomNumber: "Testing Room 3",
+			LastName:   "Guest3",
+			ChatId:     3,
+		},
+		{
+			RoomNumber: "Testing Room 4",
+			LastName:   "Guest4",
+			ChatId:     4,
+		},
+	}
+
 	if err := db.Where("true").Unscoped().Delete(&Booking{}).Error; err != nil {
 		panic("failed to clear table")
 	}
+<<<<<<< HEAD
 	db.Create(&sampleBookingWithRequest)
 	db.Create(&sampleBookingWithQuery)
 	db.Create(&sampleBookingWithUnknown)
 >>>>>>> 790e525 ((feat:) populate database with seed data)
+=======
+
+	for _, booking := range bookings {
+		err := db.Save(&booking).Error
+		if err != nil {
+			fmt.Printf("Error when creating booking")
+		}
+	}
+>>>>>>> ee114e6 ((refactor:) decouple seeding from server)
 }
