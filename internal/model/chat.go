@@ -1,6 +1,8 @@
 package model
 
 import (
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -25,27 +27,34 @@ func (c *Chat) Delete(db *gorm.DB) error {
 	return db.Delete(c).Error
 }
 
-// populate chat table with sample values
-var SampleChatWithRequest = Chat{
-	TelegramChatId: 1,
-	RequestQueries: []RequestQuery{},
-}
-
-var sampleChatWithQuery = Chat{
-	TelegramChatId: 2,
-	RequestQueries: []RequestQuery{},
-}
-
-var sampleChatWithUnknown = Chat{
-	TelegramChatId: 3,
-	RequestQueries: []RequestQuery{},
-}
-
 func (*Chat) PopulateChats(db *gorm.DB) {
+	chats := []Chat{
+		{
+			TelegramChatId: 1,
+			RequestQueries: []RequestQuery{},
+		},
+		{
+			TelegramChatId: 2,
+			RequestQueries: []RequestQuery{},
+		},
+		{
+			TelegramChatId: 3,
+			RequestQueries: []RequestQuery{},
+		},
+		{
+			TelegramChatId: 4,
+			RequestQueries: []RequestQuery{},
+		},
+	}
+
 	if err := db.Where("true").Unscoped().Delete(&Chat{}).Error; err != nil {
 		panic("failed to clear table")
 	}
-	db.Create(&SampleChatWithRequest)
-	db.Create(&sampleChatWithQuery)
-	db.Create(&sampleChatWithUnknown)
+
+	for _, chat := range chats {
+		err := db.Save(&chat).Error
+		if err != nil {
+			fmt.Printf("Error when creating chat")
+		}
+	}
 }

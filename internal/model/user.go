@@ -3,6 +3,7 @@ package model
 import (
 	"backend/internal/viewmodel"
 	"errors"
+	"fmt"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -55,16 +56,31 @@ func (u *User) BeforeCreate(db *gorm.DB) error {
 }
 
 // populate user table with sample values
-var sampleHotelStaff = User{
-	Username:          "staff1",
-	EncryptedPassword: "unencryptedsamplepassword",
-	Messages:          []Message{},
-	Role:              StaffRole,
-}
 
 func (u *User) PopulateUsers(db *gorm.DB) {
+	users := []User{
+		{
+			Username:          "staff1",
+			EncryptedPassword: "unencryptedsamplepassword",
+			Messages:          []Message{},
+			Role:              StaffRole,
+		},
+		{
+			Username:          "staff2",
+			EncryptedPassword: "unencryptedsamplepassword",
+			Messages:          []Message{},
+			Role:              AdminRole,
+		},
+	}
+
 	if err := db.Where("true").Unscoped().Delete(&User{}).Error; err != nil {
 		panic("failed to clear table")
 	}
-	db.Create(&sampleHotelStaff)
+
+	for _, user := range users {
+		err := db.Save(&user).Error
+		if err != nil {
+			fmt.Printf("Error when creating chat")
+		}
+	}
 }
