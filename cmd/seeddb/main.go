@@ -4,6 +4,7 @@ import (
 	"backend/internal/configs"
 	"backend/internal/database"
 	"flag"
+	"fmt"
 	"log"
 
 	migrate "github.com/rubenv/sql-migrate"
@@ -26,9 +27,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	migrate.ExecMax(db, "postgres", &migrate.FileMigrationSource{
+	count, err := migrate.ExecMax(db, "postgres", &migrate.FileMigrationSource{
 		Dir: "./migrations",
 	}, migrate.Up, *countFlag)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("applied %d migrations\n", count)
 
 	// Populate schema with data
 	database.PopulateDb()
