@@ -29,9 +29,7 @@ func (b *Booking) Delete(db *gorm.DB) error {
 	return db.Delete(b).Error
 }
 
-// populate bookings table with sample values
-
-func (*Booking) PopulateBookings(db *gorm.DB) {
+func PopulateBookings(db *gorm.DB) {
 
 	bookings := []Booking{
 		{

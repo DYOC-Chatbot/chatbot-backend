@@ -32,18 +32,9 @@ func GetDb() *gorm.DB {
 
 func PopulateDb() {
 	// clears all values from the table and populates sample data
-	user := &model.User{}
-	user.PopulateUsers(globalDb)
-
-	chat := &model.Chat{}
-	chat.PopulateChats(globalDb)
-
-	booking := &model.Booking{}
-	booking.PopulateBookings(globalDb)
-
-	requestQuery := &model.RequestQuery{}
-	requestQuery.PopulateRequestQueries(globalDb)
-
-	message := &model.Message{}
-	message.PopulateMessages(globalDb)
+	model.PopulateUsers(globalDb)
+	model.PopulateChats(globalDb)
+	model.PopulateBookings(globalDb)
+	model.PopulateRequestQueries(globalDb)
+	model.PopulateMessages(globalDb)
 }

@@ -65,7 +65,7 @@ func (r *RequestQuery) BeforeSave(tx *gorm.DB) error {
 	return nil
 }
 
-func (m *RequestQuery) PopulateRequestQueries(db *gorm.DB) {
+func PopulateRequestQueries(db *gorm.DB) {
 	var v1 uint = 1
 	var v2 uint = 2
 	var v3 uint = 3

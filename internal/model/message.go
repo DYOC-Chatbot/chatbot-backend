@@ -40,7 +40,7 @@ func (m *Message) Delete(db *gorm.DB) error {
 	return db.Delete(m).Error
 }
 
-func (m *Message) PopulateMessages(db *gorm.DB) {
+func PopulateMessages(db *gorm.DB) {
 	var v1 uint = 1
 
 	messages := []Message{

@@ -27,7 +27,7 @@ func (c *Chat) Delete(db *gorm.DB) error {
 	return db.Delete(c).Error
 }
 
-func (*Chat) PopulateChats(db *gorm.DB) {
+func PopulateChats(db *gorm.DB) {
 	chats := []Chat{
 		{
 			TelegramChatId: 1,

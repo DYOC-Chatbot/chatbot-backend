@@ -55,9 +55,7 @@ func (u *User) BeforeCreate(db *gorm.DB) error {
 	return nil
 }
 
-// populate user table with sample values
-
-func (u *User) PopulateUsers(db *gorm.DB) {
+func PopulateUsers(db *gorm.DB) {
 	users := []User{
 		{
 			Username:          "staff1",
