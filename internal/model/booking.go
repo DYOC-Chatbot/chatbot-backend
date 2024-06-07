@@ -54,10 +54,6 @@ func PopulateBookings(db *gorm.DB) {
 		},
 	}
 
-	if err := db.Where("true").Unscoped().Delete(&Booking{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
 	for _, booking := range bookings {
 		err := db.Save(&booking).Error
 		if err != nil {

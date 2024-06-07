@@ -102,10 +102,6 @@ func PopulateRequestQueries(db *gorm.DB) {
 		},
 	}
 
-	if err := db.Where("true").Unscoped().Delete(&RequestQuery{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
 	for _, requestQuery := range requestQueries {
 		err := db.Save(&requestQuery).Error
 		if err != nil {

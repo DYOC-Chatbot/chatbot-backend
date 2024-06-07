@@ -47,10 +47,6 @@ func PopulateChats(db *gorm.DB) {
 		},
 	}
 
-	if err := db.Where("true").Unscoped().Delete(&Chat{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
 	for _, chat := range chats {
 		err := db.Save(&chat).Error
 		if err != nil {

@@ -110,10 +110,6 @@ func PopulateMessages(db *gorm.DB) {
 		},
 	}
 
-	if err := db.Where("true").Unscoped().Delete(&Message{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
 	for _, message := range messages {
 		err := db.Save(&message).Error
 		if err != nil {

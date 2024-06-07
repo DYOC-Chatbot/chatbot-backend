@@ -71,10 +71,6 @@ func PopulateUsers(db *gorm.DB) {
 		},
 	}
 
-	if err := db.Where("true").Unscoped().Delete(&User{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
 	for _, user := range users {
 		err := db.Save(&user).Error
 		if err != nil {
