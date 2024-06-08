@@ -28,11 +28,7 @@ func (c *Chat) Delete(db *gorm.DB) error {
 	return db.Delete(c).Error
 }
 
-<<<<<<< HEAD
 func PopulateChats(db *gorm.DB) {
-=======
-func (*Chat) PopulateChats(db *gorm.DB) {
->>>>>>> ee114e6 ((refactor:) decouple seeding from server)
 	chats := []Chat{
 		{
 			TelegramChatId: 1,
@@ -52,23 +48,10 @@ func (*Chat) PopulateChats(db *gorm.DB) {
 		},
 	}
 
-<<<<<<< HEAD
 	for _, chat := range chats {
 		err := db.Save(&chat).Error
 		if err != nil {
 			fmt.Printf("Error when creating chat")
 		}
 	}
-=======
-	if err := db.Where("true").Unscoped().Delete(&Chat{}).Error; err != nil {
-		panic("failed to clear table")
-	}
-
-	for _, chat := range chats {
-		err := db.Save(&chat).Error
-		if err != nil {
-			fmt.Printf("Error when creating chat")
-		}
-	}
->>>>>>> ee114e6 ((refactor:) decouple seeding from server)
 }

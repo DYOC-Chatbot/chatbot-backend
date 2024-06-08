@@ -3,11 +3,8 @@ package database
 import (
 	"backend/internal/configs"
 	"backend/internal/model"
-<<<<<<< HEAD
 	"fmt"
 	"log"
-=======
->>>>>>> 790e525 ((feat:) populate database with seed data)
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -35,7 +32,6 @@ func GetDb() *gorm.DB {
 	return globalDb.Session(&gorm.Session{NewDB: true})
 }
 
-<<<<<<< HEAD
 func DropDb(cfg *configs.PostgresConfig) {
 	// Modify the DSN to connect to the 'postgres' database
 	var originalDb = cfg.PostgresDb
@@ -95,22 +91,4 @@ func PopulateDb() {
 	model.PopulateBookings(globalDb)
 	model.PopulateRequestQueries(globalDb)
 	model.PopulateMessages(globalDb)
-=======
-func PopulateDb() {
-	// clears all values from the table and populates sample data
-	user := &model.User{}
-	user.PopulateUsers(globalDb)
-
-	chat := &model.Chat{}
-	chat.PopulateChats(globalDb)
-
-	booking := &model.Booking{}
-	booking.PopulateBookings(globalDb)
-
-	requestQuery := &model.RequestQuery{}
-	requestQuery.PopulateRequestQueries(globalDb)
-
-	message := &model.Message{}
-	message.PopulateMessages(globalDb)
->>>>>>> 790e525 ((feat:) populate database with seed data)
 }
