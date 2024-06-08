@@ -24,7 +24,7 @@ type Message struct {
 	Timestamp         time.Time
 	HotelStaffId      *uint
 	HotelStaff        *User
-	RequestQueryId    uint
+	RequestQueryID    uint
 	RequestQuery      *RequestQuery
 }
 
@@ -49,35 +49,35 @@ func PopulateMessages(db *gorm.DB) {
 			By:                ByGuest,
 			MessageBody:       "Hello",
 			Timestamp:         time.Now(),
-			RequestQueryId:    1,
+			RequestQueryID:    1,
 		},
 		{
 			TelegramMessageID: 1,
 			By:                ByBot,
 			MessageBody:       "How may I help you",
 			Timestamp:         time.Now(),
-			RequestQueryId:    1,
+			RequestQueryID:    1,
 		},
 		{
 			TelegramMessageID: 1,
 			By:                ByGuest,
 			MessageBody:       "Bye",
 			Timestamp:         time.Now(),
-			RequestQueryId:    1,
+			RequestQueryID:    1,
 		},
 		{
 			TelegramMessageID: 1,
 			By:                ByGuest,
 			MessageBody:       "I would like extra pillows",
 			Timestamp:         time.Now(),
-			RequestQueryId:    2,
+			RequestQueryID:    2,
 		},
 		{
 			TelegramMessageID: 1,
 			By:                ByBot,
 			MessageBody:       "Processing request",
 			Timestamp:         time.Now(),
-			RequestQueryId:    2,
+			RequestQueryID:    2,
 		},
 		{
 			TelegramMessageID: 1,
@@ -85,28 +85,28 @@ func PopulateMessages(db *gorm.DB) {
 			MessageBody:       "Sending pillows to your room now",
 			Timestamp:         time.Now(),
 			HotelStaffId:      &v1,
-			RequestQueryId:    2,
+			RequestQueryID:    2,
 		},
 		{
 			TelegramMessageID: 2,
 			By:                ByGuest,
 			MessageBody:       "Food recommendation nearby",
 			Timestamp:         time.Now(),
-			RequestQueryId:    3,
+			RequestQueryID:    3,
 		},
 		{
 			TelegramMessageID: 3,
 			By:                ByGuest,
 			MessageBody:       "Breakfast hours",
 			Timestamp:         time.Now(),
-			RequestQueryId:    4,
+			RequestQueryID:    4,
 		},
 		{
 			TelegramMessageID: 3,
 			By:                ByBot,
 			MessageBody:       "Breakfast is at 0700 - 1000",
 			Timestamp:         time.Now(),
-			RequestQueryId:    4,
+			RequestQueryID:    4,
 		},
 	}
 

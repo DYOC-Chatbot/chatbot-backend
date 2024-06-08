@@ -88,7 +88,7 @@ func saveTgMessageToDB(db *gorm.DB, msg *tgbotapi.Message, by model.By) (*model.
 		By:                by,
 		MessageBody:       msg.Text,
 		Timestamp:         time.Now(),
-		RequestQueryId:    rqq.ID,
+		RequestQueryID:    rqq.ID,
 	}
 
 	if err := message.Create(db, &msgModel); err != nil {
@@ -164,7 +164,7 @@ func broadcastMessage(hub *ws.Hub, msg *model.Message, chatID uint) error {
 			By:                string(msg.By),
 			MessageBody:       msg.MessageBody,
 			Timestamp:         msg.Timestamp.Format(time.RFC3339),
-			RequestQueryId:    msg.RequestQueryId,
+			RequestQueryId:    msg.RequestQueryID,
 		},
 		ChatID: chatID,
 	}
