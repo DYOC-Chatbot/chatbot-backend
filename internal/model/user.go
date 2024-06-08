@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+	"fmt"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -45,4 +46,28 @@ func (u *User) BeforeCreate(db *gorm.DB) error {
 	}
 	u.EncryptedPassword = string(bytes)
 	return nil
+}
+
+func PopulateUsers(db *gorm.DB) {
+	users := []User{
+		{
+			Username:          "staff1",
+			EncryptedPassword: "unencryptedsamplepassword",
+			Messages:          []Message{},
+			Role:              StaffRole,
+		},
+		{
+			Username:          "staff2",
+			EncryptedPassword: "unencryptedsamplepassword",
+			Messages:          []Message{},
+			Role:              AdminRole,
+		},
+	}
+
+	for _, user := range users {
+		err := db.Save(&user).Error
+		if err != nil {
+			fmt.Printf("Error when creating chat")
+		}
+	}
 }
