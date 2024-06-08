@@ -85,7 +85,7 @@ func PopulateMessages(db *gorm.DB) {
 			By:                ByStaff,
 			MessageBody:       "Sending pillows to your room now",
 			Timestamp:         time.Now(),
-			HotelStaffId:      &v1,
+			HotelStaffID:      &v1,
 			RequestQueryID:    2,
 		},
 		{
